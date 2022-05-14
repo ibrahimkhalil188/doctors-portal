@@ -11,7 +11,7 @@ const Footer = () => {
                     <Link to="/" className="link link-hover">Branding</Link>
                     <Link to="/" className="link link-hover">Design</Link>
                     <Link to="/" className="link link-hover">Marketing</Link>
-                    <Link to="/" className="link link-hover">Advertisement</Link>
+                    <Link to="/" >Advertisement</Link>
                 </div>
                 <div>
                     <span className="footer-title">Company</span>
@@ -29,7 +29,7 @@ const Footer = () => {
             </footer>
 
 
-            <p>Copyright © 2022 - All right reserved</p>
+            <p className='text-center p-6'>Copyright © 2022 - All right reserved</p>
         </div>
 
     );
