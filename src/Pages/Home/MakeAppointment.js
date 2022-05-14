@@ -7,7 +7,7 @@ const MakeAppointment = () => {
         <div className='mt-28'>
             <div className='flex' style={{ backgroundImage: `url(${appointment})` }}>
                 <div className='flex-1'>
-                    <img className='lg:mt-[-125px] md:mt-[-100px] md:h-full hidden md:block lg:block' src={doctor} alt="" />
+                    <img className='lg:mt-[-125px] md:mt-[-100px] hidden md:block lg:block' src={doctor} alt="" />
                 </div>
                 <div className='text-white py-6 flex-1 flex items-center'>
                     <div className='pr-10'>
