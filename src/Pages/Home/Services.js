@@ -3,6 +3,7 @@ import Service from './Service';
 import cavity from '../../assets/images/cavity.png'
 import fluoride from '../../assets/images/fluoride.png'
 import whitening from '../../assets/images/whitening.png'
+import ServiceBanner from './ServiceBanner';
 const Services = () => {
     return (
         <div>
@@ -15,6 +16,7 @@ const Services = () => {
                 <Service cardTitle="Fluoride Treatment" img={fluoride}></Service>
                 <Service cardTitle="Fluoride Treatment" img={whitening}></Service>
             </div>
+            <ServiceBanner></ServiceBanner>
         </div>
     );
 };

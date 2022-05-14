@@ -2,6 +2,7 @@ import React from 'react';
 import bannerImage from "../../assets/images/chair.png"
 import backgroundImage from "../../assets/images/bg.png"
 import Info from './Info';
+import Button from '../Shared/Button';
 const Banner = () => {
     return (
         <div style={{ backgroundImage: `url(${backgroundImage})` }}>
@@ -12,7 +13,7 @@ const Banner = () => {
                     <div className='mx-6'>
                         <h1 className="text-5xl font-bold">Your New Smile Starts Here!</h1>
                         <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-                        <button className="btn btn-primary text-white uppercase test-bold bg-gradient-to-r from-secondary to-primary">Get Started</button>
+                        <Button></Button>
                     </div>
                 </div>
             </div>
