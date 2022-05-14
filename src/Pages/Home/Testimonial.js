@@ -39,11 +39,11 @@ const Testimonial = () => {
                     <h1 className='text-4xl py-4'>What Our Patients Says</h1>
                 </div>
                 <div>
-                    <img className='w-[192px] h-[156px]' src={quote} alt="" />
+                    <img className='w-[122px] h-[106px] lg:w-[192px] lg:h-[156px]' src={quote} alt="" />
                 </div>
 
             </div>
-            <div className='grid grid-cols-1 lg:grid-cols-3'>
+            <div className='grid grid-cols-1 lg:grid-cols-3 gap-4'>
                 {
                     users.map(user => <TestimonialCard key={user._id} user={user}></TestimonialCard>)
                 }

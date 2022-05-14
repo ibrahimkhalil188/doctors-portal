@@ -2,14 +2,14 @@ import React from 'react';
 import doctor from '../../assets/images/doctor.png'
 import appointment from '../../assets/images/appointment.png'
 import Button from '../Shared/Button';
-const Appointment = () => {
+const MakeAppointment = () => {
     return (
         <div className='mt-28'>
             <div className='flex' style={{ backgroundImage: `url(${appointment})` }}>
                 <div className='flex-1'>
-                    <img className='mt-[-125px]' src={doctor} alt="" />
+                    <img className='lg:mt-[-125px] md:mt-[-100px] md:h-full hidden md:block lg:block' src={doctor} alt="" />
                 </div>
-                <div className='text-white flex-1 flex items-center'>
+                <div className='text-white py-6 flex-1 flex items-center'>
                     <div className='pr-10'>
                         <h3 className='text-2xl text-secondary font-bold'>Appointment</h3>
                         <h1 className='text-4xl py-6'>Make an appointment Today</h1>
@@ -22,4 +22,4 @@ const Appointment = () => {
     );
 };
 
-export default Appointment;
+export default MakeAppointment;
