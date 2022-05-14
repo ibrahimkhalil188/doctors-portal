@@ -9,9 +9,9 @@ const Contact = () => {
                 <h2 className='text-center text-4xl text-white'>Stay connect with us</h2>
             </div>
             <form className='grid place-items-center'>
-                <input type="email" placeholder="Email Address" class="input input-bordered input-accent w-full max-w-xs" /><br></br>
-                <input type="text" placeholder="Subject" class="input input-bordered input-accent w-full max-w-xs" /><br />
-                <input type="text" placeholder="Type here" class="input input-bordered input-lg input-accent w-full max-w-xs" /><br></br>
+                <input type="email" placeholder="Email Address" className="input input-bordered input-accent w-full max-w-xs" /><br></br>
+                <input type="text" placeholder="Subject" className="input input-bordered input-accent w-full max-w-xs" /><br />
+                <input type="text" placeholder="Type here" className="input input-bordered input-lg input-accent w-full max-w-xs" /><br></br>
                 <Button>Submit</Button>
             </form>
         </div>
