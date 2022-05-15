@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
 import BookingModal from './BookingModal';
 
@@ -12,7 +13,7 @@ const AvailableAppointment = ({ selected }) => {
 
     return (
         <div>
-            <h1>{selected}</h1>
+            <h1 className='text-center text-primary text-2xl mb-12'>Available appointment on {format(selected, 'PP')}</h1>
             <div className='grid grid-cols-1 lg:grid-cols-3 gap-5'>
                 {appointmentServices.map(data =>
                     <div key={data._id}>
@@ -27,7 +28,7 @@ const AvailableAppointment = ({ selected }) => {
                                     onClick={() => setTreatment(data)}
                                     disabled={data.slots.length === 0} for="my-modal-6" class="btn btn-primary">Book appointment</label>
 
-                                <BookingModal treatment={treatment}></BookingModal>
+                                <BookingModal date={selected} treatment={treatment}></BookingModal>
                             </div>
                         </div>
                     </div>
