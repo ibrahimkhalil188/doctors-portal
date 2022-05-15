@@ -7,7 +7,7 @@ const Info = () => {
     return (
         <div className='grid grid-cols-1 lg:grid-cols-3 gap-5'>
             <InfoCard cardTitle="Opening Hour !" bgColor="bg-gradient-to-r from-secondary to-primary" img={clock}></InfoCard>
-            <InfoCard cardTitle="Visit Our Location!" bgColor="bg-[#3A4256]" img={location}></InfoCard>
+            <InfoCard cardTitle="Visit Our Location!" bgColor="bg-[#3A4257]" img={location}></InfoCard>
             <InfoCard cardTitle="Contact Us !" bgColor="bg-gradient-to-r from-secondary to-primary" img={phone}></InfoCard>
         </div>
     );

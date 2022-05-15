@@ -1,2 +1,4 @@
 calender error=solved 
 sever ar another api te data post kore kmny ?
+
+env.local ar kaj ta korte parce na
