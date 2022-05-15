@@ -3,10 +3,10 @@ import React, { useEffect, useState } from 'react';
 import BookingModal from './BookingModal';
 
 const AvailableAppointment = ({ selected }) => {
-    const [treatment, setTreatment] = useState({})
+    const [treatment, setTreatment] = useState(null)
     const [appointmentServices, setAppointmentServices] = useState([])
     useEffect(() => {
-        fetch("Services.json")
+        fetch("http://localhost:5000/services")
             .then(res => res.json())
             .then(data => setAppointmentServices(data))
     }, [])
@@ -28,7 +28,9 @@ const AvailableAppointment = ({ selected }) => {
                                     onClick={() => setTreatment(data)}
                                     disabled={data.slots.length === 0} for="my-modal-6" class="btn btn-primary">Book appointment</label>
 
-                                <BookingModal date={selected} treatment={treatment}></BookingModal>
+                                {
+                                    treatment && <BookingModal date={selected} treatment={treatment} setTreatment={setTreatment}></BookingModal>
+                                }
                             </div>
                         </div>
                     </div>
