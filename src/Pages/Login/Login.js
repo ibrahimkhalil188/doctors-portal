@@ -17,21 +17,27 @@ const Login = () => {
         <div className='flex justify-center items-center h-screen'>
             <div class="card w-96 bg-base-100 shadow-xl">
                 <div class="card-body">
-                    <div>
-                        <h2 class="text-center text-4xl font-bold">Login</h2>
-                        <div class="form-control w-full max-w-xs">
-                            <label class="label">
-                                <p className='font-bold'>Your Email</p>
-                            </label>
-                            <input type="text" placeholder="Type here" class="input bg-base-200 w-full max-w-xs" />
-                        </div>
-                        <div class="form-control w-full max-w-xs">
-                            <label class="label">
-                                <p className='font-bold'>Your Password</p>
-                            </label>
-                            <input type="text" placeholder="Type here" class="input bg-base-200 w-full max-w-xs" />
-                        </div>
-                    </div>
+                    <h2 class="text-center text-4xl font-bold">Login</h2>
+                    <form>
+
+
+
+                        <label class="label">
+                            <span class="label-text">Email</span>
+                        </label>
+                        <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+                        <label class="label">
+                            <span class="label-text-alt">Alt label</span>
+                        </label>
+                        <label class="label">
+                            <span class="label-text">Password</span>
+                        </label>
+                        <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+                        <label class="label">
+                            <span class="label-text-alt">Alt label</span>
+                        </label>
+                        <input type="submit" value="Login" placeholder="Type here" class="input input-bordered bg-black text-white text-xl w-full max-w-xs" />
+                    </form>
                     <div class="divider">OR</div>
                     <button class="btn btn-outline text-xl" onClick={() => signInWithGoogle()}>Login With Google</button>
 
