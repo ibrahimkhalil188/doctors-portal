@@ -1,19 +1,19 @@
 import React from 'react';
-import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import auth from '../../firebase.init'
+import auth from '../../firebase.init';
 import Spinner from '../Shared/Spinner';
 
-const Login = () => {
+const SingUp = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
     const [
-        signInWithEmailAndPassword,
+        createUserWithEmailAndPassword,
         user,
         loading,
         error,
-    ] = useSignInWithEmailAndPassword(auth);
+    ] = useCreateUserWithEmailAndPassword(auth);
 
     let singInError;
     if (user || gUser) {
@@ -27,9 +27,8 @@ const Login = () => {
     }
 
     const onSubmit = data => {
-        signInWithEmailAndPassword(data.email, data.password)
+        createUserWithEmailAndPassword(data.email, data.password)
     };
-
     return (
         <div className='flex justify-center items-center h-screen'>
             <div class="card w-96 bg-base-100 shadow-xl">
@@ -37,6 +36,30 @@ const Login = () => {
                     <h2 class="text-center text-4xl font-bold">Login</h2>
                     <form onSubmit={handleSubmit(onSubmit)}>
 
+                        <div class="form-control w-full max-w-xs">
+                            <label class="label">
+                                <span class="label-text">Name</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                placeholder="Your name"
+                                class="input input-bordered w-full max-w-xs"
+                                {...register("text", {
+                                    required: {
+                                        value: true,
+                                        message: "Email is required"
+                                    }
+                                })}
+                            />
+
+                            <label class="label">
+                                {errors.text?.type === 'required' && <span className="label-text-alt text-red-500">{errors.text.message}</span>
+                                }
+                                {errors.email?.type === 'pattern' && <span className="label-text-alt text-red-500">{errors.email.message}</span>
+                                }
+                            </label>
+                        </div>
 
                         <div class="form-control w-full max-w-xs">
                             <label class="label">
@@ -45,7 +68,7 @@ const Login = () => {
 
                             <input
                                 type="email"
-                                placeholder="Type here"
+                                placeholder="Your email"
                                 class="input input-bordered w-full max-w-xs"
                                 {...register("email", {
                                     pattern: {
@@ -73,7 +96,7 @@ const Login = () => {
 
                             <input
                                 type="password"
-                                placeholder="Type here"
+                                placeholder="Your password"
                                 class="input input-bordered w-full max-w-xs"
                                 {...register("password", {
                                     minLength: {
@@ -95,9 +118,9 @@ const Login = () => {
                             </label>
                         </div>
                         {singInError}
-                        <input class="input input-bordered w-full max-w-xs text-white text-xl bg-black" type="submit" value="Login" />
+                        <input class="input input-bordered w-full max-w-xs text-white text-xl bg-black" type="submit" value="SignUp" />
                     </form>
-                    <p className='text-md font-bold my-4'>New on doctor portal? <Link className='text-secondary ' to="/signup">SignUP</Link></p>
+                    <p className='text-md font-bold my-4'>Already have an account? <Link className='text-secondary ' to="/login">Please Login</Link></p>
                     <div class="divider">OR</div>
                     <button class="btn btn-outline text-xl" onClick={() => signInWithGoogle()}>Login With Google</button>
 
@@ -107,4 +130,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default SingUp;
