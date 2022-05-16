@@ -35,20 +35,20 @@ const SingUp = () => {
     };
     return (
         <div className='flex justify-center items-center h-screen'>
-            <div class="card w-96 bg-base-100 shadow-xl">
-                <div class="card-body">
-                    <h2 class="text-center text-4xl font-bold">Sing Up</h2>
+            <div className="card w-96 bg-base-100 shadow-xl">
+                <div className="card-body">
+                    <h2 className="text-center text-4xl font-bold">Sing Up</h2>
                     <form onSubmit={handleSubmit(onSubmit)}>
 
-                        <div class="form-control w-full max-w-xs">
-                            <label class="label">
-                                <span class="label-text">Name</span>
+                        <div className="form-control w-full max-w-xs">
+                            <label className="label">
+                                <span className="label-text">Name</span>
                             </label>
 
                             <input
                                 type="name"
                                 placeholder="Your name"
-                                class="input input-bordered w-full max-w-xs"
+                                className="input input-bordered w-full max-w-xs"
                                 {...register("name", {
                                     required: {
                                         value: true,
@@ -57,22 +57,22 @@ const SingUp = () => {
                                 })}
                             />
 
-                            <label class="label">
+                            <label className="label">
                                 {errors.name?.type === 'required' && <span className="label-text-alt text-red-500">{errors.name.message}</span>
                                 }
 
                             </label>
                         </div>
 
-                        <div class="form-control w-full max-w-xs">
-                            <label class="label">
-                                <span class="label-text">Email</span>
+                        <div className="form-control w-full max-w-xs">
+                            <label className="label">
+                                <span className="label-text">Email</span>
                             </label>
 
                             <input
                                 type="email"
                                 placeholder="Your email"
-                                class="input input-bordered w-full max-w-xs"
+                                className="input input-bordered w-full max-w-xs"
                                 {...register("email", {
                                     pattern: {
                                         value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
@@ -85,22 +85,22 @@ const SingUp = () => {
                                 })}
                             />
 
-                            <label class="label">
+                            <label className="label">
                                 {errors.email?.type === 'required' && <span className="label-text-alt text-red-500">{errors.email.message}</span>
                                 }
                                 {errors.email?.type === 'pattern' && <span className="label-text-alt text-red-500">{errors.email.message}</span>
                                 }
                             </label>
                         </div>
-                        <div class="form-control w-full max-w-xs">
-                            <label class="label">
-                                <span class="label-text">Password</span>
+                        <div className="form-control w-full max-w-xs">
+                            <label className="label">
+                                <span className="label-text">Password</span>
                             </label>
 
                             <input
                                 type="password"
                                 placeholder="Your password"
-                                class="input input-bordered w-full max-w-xs"
+                                className="input input-bordered w-full max-w-xs"
                                 {...register("password", {
                                     minLength: {
                                         value: 6,
@@ -113,7 +113,7 @@ const SingUp = () => {
                                 })}
                             />
 
-                            <label class="label">
+                            <label className="label">
                                 {errors.password?.type === 'required' && <span className="label-text-alt text-red-500">{errors.password.message}</span>
                                 }
                                 {errors.password?.type === 'minLength' && <span className="label-text-alt text-red-500">{errors.password.message}</span>
@@ -121,11 +121,11 @@ const SingUp = () => {
                             </label>
                         </div>
                         {singInError}
-                        <input class="input input-bordered w-full max-w-xs text-white text-xl bg-black" type="submit" value="SignUp" />
+                        <input className="input input-bordered w-full max-w-xs text-white text-xl bg-black" type="submit" value="SignUp" />
                     </form>
                     <p className='text-md font-bold my-4'>Already have an account? <Link className='text-secondary ' to="/login">Please Login</Link></p>
-                    <div class="divider">OR</div>
-                    <button class="btn btn-outline text-xl" onClick={() => signInWithGoogle()}>Login With Google</button>
+                    <div className="divider">OR</div>
+                    <button className="btn btn-outline text-xl" onClick={() => signInWithGoogle()}>Login With Google</button>
 
                 </div>
             </div>

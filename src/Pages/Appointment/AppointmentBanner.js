@@ -11,9 +11,9 @@ const AppointmentBanner = ({ selected, setSelected }) => {
     }
     return (
         <div>
-            <div class="hero min-h-screen ">
-                <div class="hero-content flex-col lg:flex-row-reverse">
-                    <img src={banner} class="max-w-sm rounded-lg shadow-2xl" alt='dental chair' />
+            <div className="hero min-h-screen ">
+                <div className="hero-content flex-col lg:flex-row-reverse">
+                    <img src={banner} className="max-w-sm rounded-lg shadow-2xl" alt='dental chair' />
                     <div className='border hover:border-primary rounded-lg mx-12'>
                         <DayPicker
                             mode="single"
