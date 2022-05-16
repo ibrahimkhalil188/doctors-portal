@@ -1,5 +1,5 @@
 import React from 'react';
-import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import auth from '../../firebase.init';
@@ -15,25 +15,29 @@ const SingUp = () => {
         error,
     ] = useCreateUserWithEmailAndPassword(auth);
 
+    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+
     let singInError;
     if (user || gUser) {
         console.log(user || gUser)
     }
-    if (error || gError) {
-        singInError = <p className='text-red-600 my-6'>{error?.message || gError?.message}</p>
+    if (error || gError || updateError) {
+        singInError = <p className='text-red-600 my-6'>{error?.message || gError?.message || updateError?.message}</p>
     }
-    if (loading || gLoading) {
+    if (loading || gLoading || updating) {
         return <Spinner></Spinner>
     }
 
-    const onSubmit = data => {
-        createUserWithEmailAndPassword(data.email, data.password)
+    const onSubmit = async data => {
+        console.log(data)
+        await createUserWithEmailAndPassword(data.email, data.password)
+        await updateProfile({ displayName: data.name })
     };
     return (
         <div className='flex justify-center items-center h-screen'>
             <div class="card w-96 bg-base-100 shadow-xl">
                 <div class="card-body">
-                    <h2 class="text-center text-4xl font-bold">Login</h2>
+                    <h2 class="text-center text-4xl font-bold">Sing Up</h2>
                     <form onSubmit={handleSubmit(onSubmit)}>
 
                         <div class="form-control w-full max-w-xs">
@@ -42,10 +46,10 @@ const SingUp = () => {
                             </label>
 
                             <input
-                                type="text"
+                                type="name"
                                 placeholder="Your name"
                                 class="input input-bordered w-full max-w-xs"
-                                {...register("text", {
+                                {...register("name", {
                                     required: {
                                         value: true,
                                         message: "Email is required"
@@ -54,10 +58,9 @@ const SingUp = () => {
                             />
 
                             <label class="label">
-                                {errors.text?.type === 'required' && <span className="label-text-alt text-red-500">{errors.text.message}</span>
+                                {errors.name?.type === 'required' && <span className="label-text-alt text-red-500">{errors.name.message}</span>
                                 }
-                                {errors.email?.type === 'pattern' && <span className="label-text-alt text-red-500">{errors.email.message}</span>
-                                }
+
                             </label>
                         </div>
 
