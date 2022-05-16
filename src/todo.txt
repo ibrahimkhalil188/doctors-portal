@@ -1,4 +1,7 @@
-calender error=solved 
+calender error=solved  onDayClick
+
+spelling mistake can kill your 1 hours
+
 sever ar another api te data post kore kmny ?
 
 env.local ar kaj ta korte parce na ==== you miss clone!

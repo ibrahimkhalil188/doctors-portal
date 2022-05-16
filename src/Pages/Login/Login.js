@@ -1,42 +1,100 @@
 import React from 'react';
-import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useForm } from 'react-hook-form';
 import auth from '../../firebase.init'
+import Spinner from '../Shared/Spinner';
 
 const Login = () => {
-    const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
-    if (user) {
-        console.log(user)
+    const { register, formState: { errors }, handleSubmit } = useForm();
+    const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+    const [
+        signInWithEmailAndPassword,
+        user,
+        loading,
+        error,
+    ] = useSignInWithEmailAndPassword(auth);
+
+    let singInError;
+    if (user || gUser) {
+        console.log(user || gUser)
     }
-    if (error) {
-        console.log(error)
+    if (error || gError) {
+        singInError = <p className='text-red-600 my-6'>{error.message || gError.message}</p>
     }
-    if (loading) {
-        <p>loading</p>
+    if (loading || gLoading) {
+        return <Spinner></Spinner>
     }
+
+    const onSubmit = data => {
+        signInWithEmailAndPassword(data.email, data.password)
+    };
+
     return (
         <div className='flex justify-center items-center h-screen'>
             <div class="card w-96 bg-base-100 shadow-xl">
                 <div class="card-body">
                     <h2 class="text-center text-4xl font-bold">Login</h2>
-                    <form>
+                    <form onSubmit={handleSubmit(onSubmit)}>
 
 
+                        <div class="form-control w-full max-w-xs">
+                            <label class="label">
+                                <span class="label-text">Email</span>
+                            </label>
 
-                        <label class="label">
-                            <span class="label-text">Email</span>
-                        </label>
-                        <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
-                        <label class="label">
-                            <span class="label-text-alt">Alt label</span>
-                        </label>
-                        <label class="label">
-                            <span class="label-text">Password</span>
-                        </label>
-                        <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
-                        <label class="label">
-                            <span class="label-text-alt">Alt label</span>
-                        </label>
-                        <input type="submit" value="Login" placeholder="Type here" class="input input-bordered bg-black text-white text-xl w-full max-w-xs" />
+                            <input
+                                type="email"
+                                placeholder="Type here"
+                                class="input input-bordered w-full max-w-xs"
+                                {...register("email", {
+                                    pattern: {
+                                        value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                                        message: "Provide a valid email"
+                                    },
+                                    required: {
+                                        value: true,
+                                        message: "Email is required"
+                                    }
+                                })}
+                            />
+
+                            <label class="label">
+                                {errors.email?.type === 'required' && <span className="label-text-alt text-red-500">{errors.email.message}</span>
+                                }
+                                {errors.email?.type === 'pattern' && <span className="label-text-alt text-red-500">{errors.email.message}</span>
+                                }
+                            </label>
+                        </div>
+                        <div class="form-control w-full max-w-xs">
+                            <label class="label">
+                                <span class="label-text">Password</span>
+                            </label>
+
+                            <input
+                                type="password"
+                                placeholder="Type here"
+                                class="input input-bordered w-full max-w-xs"
+                                {...register("password", {
+                                    minLength: {
+                                        value: 6,
+                                        message: "Password must be greater then 6 character"
+                                    },
+                                    required: {
+                                        value: true,
+                                        message: "Password is required"
+                                    }
+                                })}
+                            />
+
+                            <label class="label">
+                                {errors.password?.type === 'required' && <span className="label-text-alt text-red-500">{errors.password.message}</span>
+                                }
+                                {errors.password?.type === 'minLength' && <span className="label-text-alt text-red-500">{errors.password.message}</span>
+                                }
+                            </label>
+                        </div>
+                        {singInError}
+                        <input class="input input-bordered w-full max-w-xs text-white text-xl bg-black" type="submit" value="Login" />
                     </form>
                     <div class="divider">OR</div>
                     <button class="btn btn-outline text-xl" onClick={() => signInWithGoogle()}>Login With Google</button>
