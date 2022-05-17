@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import BookingModal from './BookingModal';
 
 const AvailableAppointment = ({ selected }) => {
+
     const [treatment, setTreatment] = useState(null)
     const [appointmentServices, setAppointmentServices] = useState([])
     const formattedDate = format(selected, 'PP');
