@@ -1,20 +1,46 @@
 import { format } from 'date-fns';
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 
 const BookingModal = ({ treatment, date, setTreatment }) => {
     const [user] = useAuthState(auth);
-    const { name, slots } = treatment
-
+    const { _id, name, slots } = treatment
+    const formattedDate = format(date, 'PP');
     const handleSubmit = event => {
         event.preventDefault()
         const slot = event.target.slot.value
         const phone = event.target.phone.value
-        const email = event.target.email.value
         const InputDate = event.target.date.value
-        console.log(InputDate, slot, phone, email)
-        setTreatment(null)
+        const treatmentId = _id
+        const email = user?.email
+
+        const booking = {
+            treatmentId, name, InputDate, slot, phone, email
+        }
+
+        fetch("http://localhost:5000/booking", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(booking)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    toast(`Appointment is set on ${formattedDate} at ${slot}`)
+                }
+                else {
+                    toast.error(`Appointment already  set on ${data.exist?.InputDate} at ${data.exist?.slot}`)
+                }
+                setTreatment(null)
+                console.log(data)
+
+
+            })
+
 
     }
     return (
@@ -37,7 +63,7 @@ const BookingModal = ({ treatment, date, setTreatment }) => {
                             </select>
                             <input type="text" name='name' placeholder="Your name" className="input  w-full max-w-xs bg-base-200" defaultValue={user?.displayName} readOnly />
                             <input type="email" name='email' placeholder="Your email" className="input   w-full max-w-xs bg-base-200" defaultValue={user?.email} readOnly />
-                            <input type="number" name='phone' placeholder="Phone number" className="input   w-full max-w-xs bg-base-200" />
+                            <input type="number" name='phone' placeholder="Phone number" className="input   w-full max-w-xs bg-base-200" required />
                             <button className="btn btn-primary w-full max-w-xs ">Submit</button>
                         </form>
                     </div>

@@ -1,7 +1,10 @@
 import { Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import './App.css';
 import About from './Pages/About/About';
 import Appointment from './Pages/Appointment/Appointment';
+import Booking from './Pages/Appointment/Booking';
+import BookingModal from './Pages/Appointment/BookingModal';
 import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
 import RequireAuth from './Pages/Login/RequireAuth';
@@ -23,7 +26,9 @@ function App() {
         }></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/signup' element={<SingUp></SingUp>}></Route>
+
       </Routes>
+      <ToastContainer />
     </div >
   );
 }
