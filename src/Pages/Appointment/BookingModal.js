@@ -36,9 +36,6 @@ const BookingModal = ({ treatment, date, setTreatment }) => {
                     toast.error(`Appointment already  set on ${data.exist?.InputDate} at ${data.exist?.slot}`)
                 }
                 setTreatment(null)
-                console.log(data)
-
-
             })
 
 

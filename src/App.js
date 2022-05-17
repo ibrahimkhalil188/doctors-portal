@@ -3,8 +3,6 @@ import { ToastContainer } from 'react-toastify';
 import './App.css';
 import About from './Pages/About/About';
 import Appointment from './Pages/Appointment/Appointment';
-import Booking from './Pages/Appointment/Booking';
-import BookingModal from './Pages/Appointment/BookingModal';
 import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
 import RequireAuth from './Pages/Login/RequireAuth';
