@@ -12,7 +12,6 @@ const AvailableAppointment = ({ selected }) => {
             .then(res => res.json())
             .then(data => setAppointmentServices(data))
     }, [formattedDate])
-    console.log()
     return (
         <div>
             <h1 className='text-center text-primary text-2xl mb-12'>Available appointment on {format(selected, 'PP')}</h1>

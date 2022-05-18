@@ -1,8 +1,9 @@
 import React from 'react';
 import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
+import UseToken from '../Hooks/UseToken';
 import Spinner from '../Shared/Spinner';
 
 const SingUp = () => {
@@ -14,13 +15,19 @@ const SingUp = () => {
         loading,
         error,
     ] = useCreateUserWithEmailAndPassword(auth);
-
+    const navigate = useNavigate()
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
+    const [token] = UseToken(user || gUser)
+
     let singInError;
-    if (user || gUser) {
-        console.log(user || gUser)
+    let location = useLocation();
+    let from = location.state?.from?.pathname || "/";
+
+    if (token) {
+        navigate(from, { replace: true });
     }
+
     if (error || gError || updateError) {
         singInError = <p className='text-red-600 my-6'>{error?.message || gError?.message || updateError?.message}</p>
     }
@@ -29,7 +36,6 @@ const SingUp = () => {
     }
 
     const onSubmit = async data => {
-        console.log(data)
         await createUserWithEmailAndPassword(data.email, data.password)
         await updateProfile({ displayName: data.name })
     };
