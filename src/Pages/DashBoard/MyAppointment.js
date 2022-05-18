@@ -1,17 +1,33 @@
+import { signOut } from 'firebase/auth';
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 
 const MyAppointment = () => {
     const [user] = useAuthState(auth);
     const [bookings, setBookings] = useState([])
+    const navigate = useNavigate()
     useEffect(() => {
         const url = `http://localhost:5000/booking?email=${user?.email}`
-        fetch(url)
-            .then(res => res.json())
+        fetch(url, {
+            method: "GET",
+            headers: {
+                "authorization": `Bearer ${localStorage.getItem("access_token")}`
+            }
+        })
+            .then(res => {
+                if (res.status === (403 || 401)) {
+                    signOut(auth);
+                    localStorage.removeItem("access_token")
+                    navigate("/")
+                }
+
+                return res.json()
+            })
             .then(data => setBookings(data))
-    }, [user?.email])
+    }, [user?.email, navigate])
 
     return (
         <div>
